@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Envio de Laudos Médicos</title>
+    <style>
+        /* Código padrão do CSS */
+@charset "UTF-8";
+
+/* Importações */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Variaveis */
+:root {
+    --font: "Poppins", arial, sans-serif;
+    --color01: #333; /* Cinza */
+    --color02: #f00e0e; /* Vermelho */
+    --color03: #ccc; /* Branco */
+}
+
+/* Código que fazem alteranções em geral */
+* {
+    font-family: var(--font)    ;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    color: white;
+}
+
+body {
+    background-color: black;
+
+}
+
+.container {
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%, -50%);
+}
+
+.formContainer {
+    width: 100%;
+    margin: 10px;
+    text-align: left;
+    padding: 1rem;
+    font-style: italic;
+}
+
+.inputText {
+    width: 100%;
+    border-bottom: 2px solid var(--color01);
+    padding: 5px;
+    background: none;
+    font-size: 1.3rem;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--color01);
+    color: var(--color03);
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+button:hover {
+    background-color: var(--color03);
+    color: var(--color01);
+    border: 2px solid var(--color01);
+    cursor: pointer;
+}
+
+.responseContainer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="formContainer">
+        <form enctype="multipart/form-data" method="post" th:action="@{/adm/envio-laudo}">
+            <label for="cpfPaciente">CPF do Paciente: </label>
+            <input class="inputText" id="cpfPaciente" name="cpfPaciente" required type="number" >
+
+            <label for="nomePaciente">Nome do Paciente: </label>
+            <input class="inputText" id="nomePaciente" name="nomePaciente" required type="text">
+
+            <label for="emailPaciente">E-mail do Paciente: </label>
+            <input class="inputText" id="emailPaciente" name="emailPaciente" required type="text">
+
+            <label for="exameTipo">Tipo do Exame: </label>
+            <input class="inputText" id="exameTipo" name="exameTipo" required type="text">
+
+            <label for="codigoPaciente">Código do Paciente: </label>
+            <input class="inputText" id="codigoPaciente" name="codigoPaciente" required type="number">
+
+            <label for="nomeArquivoPdf">Arquivo PDF: </label>
+            <input class="inputText" id="nomeArquivoPdf" name="nomeArquivoPdf" required type="file">
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <div class="responseContainer" th:if="${mensagem}">
+        <p th:text="${mensagem}"></p>
+    </div>
+
+</div>
+</body>
+</html>
